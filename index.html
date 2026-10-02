@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Placar Interativo</title>
+  <style>
+    body {
+      background: transparent;
+      color: white;
+      font-family: sans-serif;
+      text-align: center;
+    }
+    .container {
+      display: flex;
+      justify-content: space-around;
+      font-size: 32px;
+    }
+  </style>
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div>
+      <h2 id="nomeA">TIME A</h2>
+      <h1 id="golsA">0</h1>
+    </div>
+    <div><h1>VS</h1></div>
+    <div>
+      <h2 id="nomeB">TIME B</h2>
+      <h1 id="golsB">0</h1>
+    </div>
+  </div>
+
+  <script>
+    const socket = io();
+    socket.on('atualizarPlacar', (dados) => {
+      document.getElementById('golsA').innerText = dados.golsA;
+      document.getElementById('golsB').innerText = dados.golsB;
+    });
+  </script>
+</body>
+</html>
